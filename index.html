@@ -1,0 +1,803 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Recep Sağlam - aviyonik donanım, uçuş bilgisayarı tasarımı ve donanım doğrulama portfolyosu.">
+<style>html{color-scheme:light}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Recep Sağlam Portfolyo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<style>
+/* Layout: engineering-drawing title block up top, then one column of project "sheets", each with a gallery and a spec column. Stackups drawn as layer bars. */
+:root {
+  --bg: #F2F4F3;
+  --surface: #FFFFFF;
+  --ink: #15201C;
+  --muted: #56645F;
+  --line: #D3DBD7;
+  --copper: #A4561F;
+  --mask: #1E5B47;
+  --mask-soft: #E3ECE8;
+  --font-display: "IBM Plex Sans Condensed", "Arial Narrow", "Roboto Condensed", sans-serif;
+  --font-body: "IBM Plex Sans", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --step--1: 0.8125rem;
+  --step-0: 1rem;
+  --step-1: 1.1875rem;
+  --step-2: 1.5rem;
+  --step-3: 2.125rem;
+  --step-4: clamp(2.25rem, 5vw, 3.25rem);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0E1513; --surface: #151E1B; --ink: #E2E9E5; --muted: #95A59F; --line: #2A3732;
+    --copper: #E39158; --mask: #4FA383; --mask-soft: #1B2A25; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0E1513; --surface: #151E1B; --ink: #E2E9E5; --muted: #95A59F; --line: #2A3732;
+  --copper: #E39158; --mask: #4FA383; --mask-soft: #1B2A25; color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--ink);
+  font-family: var(--font-body); font-size: var(--step-0); line-height: 1.6;
+  padding-inline: 16px; padding-block: 0 48px;
+}
+a { color: var(--copper); text-underline-offset: 3px; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--copper); outline-offset: 2px; }
+h1, h2, h3 { font-family: var(--font-display); line-height: 1.15; text-wrap: balance; margin: 0; }
+.wrap { max-width: 1080px; margin-inline: auto; }
+.mono { font-family: var(--font-mono); }
+.eyebrow {
+  font-family: var(--font-mono); font-size: var(--step--1); letter-spacing: 0.06em;
+  text-transform: uppercase; color: var(--muted);
+}
+
+/* nav */
+nav.top {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5;
+  background: var(--bg); border-bottom: 1px solid var(--line);
+  margin-inline: -16px; padding-inline: 16px;
+}
+nav.top .wrap { display: flex; gap: 20px; overflow-x: auto; padding-block: 10px; scrollbar-width: none; }
+nav.top a {
+  font-family: var(--font-mono); font-size: var(--step--1); text-transform: uppercase; letter-spacing: 0.06em;
+  color: var(--muted); text-decoration: none; white-space: nowrap;
+}
+nav.top a:hover { color: var(--ink); }
+
+/* title block */
+.titleblock {
+  margin-top: 32px; border: 1.5px solid var(--ink); background: var(--surface);
+  display: grid; grid-template-columns: 180px 1fr;
+}
+.titleblock .photo { border-right: 1.5px solid var(--ink); }
+.titleblock .photo img { display: block; width: 100%; height: 100%; object-fit: cover; aspect-ratio: 324 / 383; }
+.tb-main { display: grid; grid-template-rows: auto 1fr; min-width: 0; }
+.tb-name { padding: 20px 22px 18px; border-bottom: 1px solid var(--line); }
+.tb-name h1 { font-size: var(--step-4); font-weight: 700; letter-spacing: -0.01em; }
+.tb-name p { margin: 6px 0 0; color: var(--muted); font-size: var(--step-1); }
+.tb-cells { display: grid; grid-template-columns: repeat(4, 1fr); }
+.tb-cell { padding: 12px 16px; border-right: 1px solid var(--line); min-width: 0; }
+.tb-cell:last-child { border-right: 0; }
+.tb-cell .eyebrow { display: block; margin-bottom: 4px; }
+.tb-cell span.v { font-family: var(--font-mono); font-size: 0.875rem; overflow-wrap: anywhere; }
+.tb-cell a { color: inherit; }
+
+.highlights {
+  margin: 0; padding: 0; list-style: none; border: 1.5px solid var(--ink); border-top: 0;
+  display: grid; grid-template-columns: repeat(4, 1fr); background: var(--surface);
+}
+.highlights li { padding: 14px 16px; border-right: 1px solid var(--line); }
+.highlights li:last-child { border-right: 0; }
+.highlights b { display: block; font-family: var(--font-display); font-size: var(--step-1); font-weight: 600; color: var(--copper); }
+.highlights span { font-size: 0.875rem; color: var(--muted); }
+
+/* sections */
+section.block { margin-top: 64px; }
+.sec-head { display: flex; align-items: baseline; gap: 14px; border-bottom: 1.5px solid var(--ink); padding-bottom: 8px; margin-bottom: 24px; }
+.sec-head h2 { font-size: var(--step-3); font-weight: 700; }
+.sec-head .eyebrow { margin-left: auto; }
+.prose { max-width: 66ch; }
+.prose p { margin: 0 0 12px; }
+
+/* experience */
+.exp { display: grid; grid-template-columns: 220px 1fr; gap: 24px; padding-block: 20px; border-bottom: 1px solid var(--line); }
+.exp:last-child { border-bottom: 0; }
+.exp-meta { font-family: var(--font-mono); font-size: var(--step--1); color: var(--muted); line-height: 1.5; }
+.exp-meta b { display: block; font-family: var(--font-display); font-size: var(--step-1); color: var(--ink); font-weight: 600; margin-bottom: 4px; }
+.exp h3 { font-size: var(--step-2); font-weight: 600; margin-bottom: 4px; }
+.exp .sub { color: var(--muted); margin: 0 0 10px; }
+ul.points { margin: 0; padding-left: 1.1em; max-width: 70ch; }
+ul.points li { margin-bottom: 6px; }
+ul.points li::marker { color: var(--copper); }
+.note { font-size: 0.875rem; color: var(--muted); font-style: italic; margin-top: 10px; }
+
+/* projects */
+.proj { background: var(--surface); border: 1px solid var(--line); margin-bottom: 28px; }
+.proj-head { padding: 18px 22px 14px; border-bottom: 1px solid var(--line); display: grid; gap: 4px; }
+.proj-head h3 { font-size: var(--step-2); font-weight: 700; }
+.proj-head .role { color: var(--muted); }
+.tag {
+  display: inline-block; font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.04em;
+  padding: 2px 8px; border: 1px solid var(--copper); color: var(--copper); margin-right: 6px; text-transform: uppercase;
+}
+.tag.draft { border-style: dashed; border-color: var(--muted); color: var(--muted); }
+.proj-body { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); }
+.gallery { padding: 16px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; align-content: start; border-right: 1px solid var(--line); }
+.gallery button {
+  all: unset; cursor: zoom-in; display: block; background: var(--mask-soft); aspect-ratio: 4 / 3; overflow: hidden;
+}
+.gallery button:focus-visible { outline: 2px solid var(--copper); outline-offset: 2px; }
+.gallery img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .25s ease; }
+.gallery button:hover img { transform: scale(1.03); }
+.gallery .lead { grid-column: span 2; grid-row: span 2; aspect-ratio: auto; }
+.gallery .solo { grid-column: 1 / -1; aspect-ratio: 16 / 9; }
+.gallery.two { grid-template-columns: 1fr 1fr; }
+.gallery.two button { grid-column: auto; grid-row: auto; aspect-ratio: 4 / 5; }
+.gallery.two .fit { background: var(--surface); }
+.gallery.stacked { grid-template-columns: 1fr; }
+.gallery.stacked button { aspect-ratio: 1280 / 802; background: var(--surface); }
+.gallery .fit img { object-fit: contain; }
+.placeholder {
+  grid-column: 1 / -1; aspect-ratio: 16 / 9; border: 1.5px dashed var(--line); display: grid; place-items: center;
+  color: var(--muted); font-family: var(--font-mono); font-size: var(--step--1); text-align: center; padding: 16px;
+}
+.figs { grid-column: 1 / -1; border-top: 1px solid var(--line); padding: 16px; display: grid; gap: 20px; }
+.figs figure { margin: 0; display: grid; gap: 8px; }
+.figs button { all: unset; cursor: zoom-in; display: block; background: #FFFFFF; border: 1px solid var(--line); }
+.figs button:focus-visible { outline: 2px solid var(--copper); outline-offset: 2px; }
+.figs img { display: block; width: 100%; height: auto; }
+.figs figure.compact { max-width: 440px; }
+.figs figcaption { font-family: var(--font-mono); font-size: var(--step--1); color: var(--muted); }
+.path { padding: 16px; display: grid; align-content: start; border-right: 1px solid var(--line); }
+.band { border: 1px dashed var(--line); padding: 10px; display: grid; gap: 0; }
+.band .eyebrow { margin-bottom: 8px; }
+.node { border: 1.5px solid var(--ink); background: var(--surface); padding: 8px 10px; font-family: var(--font-mono); font-size: 0.875rem; font-weight: 500; overflow-wrap: anywhere; }
+.node small { display: block; font-weight: 400; font-size: 0.75rem; color: var(--muted); margin-top: 2px; }
+.arrow { text-align: center; color: var(--copper); font-family: var(--font-mono); font-size: 0.75rem; padding-block: 6px; }
+pre.cli { margin: 0; overflow-x: auto; background: var(--mask-soft); border: 1px solid var(--line); padding: 12px 14px; font-family: var(--font-mono); font-size: 0.8125rem; line-height: 1.6; }
+pre.cli .c { color: var(--muted); }
+.detail { padding: 18px 22px 22px; display: grid; gap: 18px; align-content: start; min-width: 0; }
+.detail h4 { margin: 0 0 6px; font-family: var(--font-mono); font-size: var(--step--1); font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); }
+.detail p { margin: 0; }
+dl.spec { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 4px 14px; font-size: 0.875rem; }
+dl.spec dt { color: var(--muted); }
+dl.spec dd { margin: 0; font-family: var(--font-mono); overflow-wrap: anywhere; }
+.links { display: flex; flex-wrap: wrap; gap: 6px 16px; font-family: var(--font-mono); font-size: 0.8125rem; }
+
+/* stackup */
+.stack { display: grid; gap: 3px; max-width: 320px; }
+.stack .l { display: grid; grid-template-columns: 26px 1fr; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 0.6875rem; color: var(--muted); }
+.stack .l i { display: block; height: 7px; }
+.stack .l.sig i { background: var(--copper); }
+.stack .l.gnd i { background: var(--mask); }
+.stack .l.mix i { background: linear-gradient(90deg, var(--copper) 0 55%, var(--mask) 55% 100%); }
+.stack .l span { grid-column: 2; margin-top: -2px; }
+.stack-wrap { display: grid; gap: 6px; }
+
+/* other projects */
+.others { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.other { background: var(--surface); border: 1px solid var(--line); display: grid; grid-template-columns: 140px 1fr; }
+.other button { all: unset; cursor: zoom-in; background: var(--mask-soft); }
+.other img { width: 100%; height: 100%; object-fit: cover; display: block; aspect-ratio: 1; }
+.other div { padding: 14px 16px; min-width: 0; }
+.other h3 { font-size: var(--step-1); font-weight: 600; margin-bottom: 4px; }
+.other p { margin: 0; font-size: 0.9375rem; color: var(--muted); }
+
+/* skills */
+.skills { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border-top: 1px solid var(--line); }
+.skill { padding: 16px 18px 16px 0; border-bottom: 1px solid var(--line); min-width: 0; }
+.skill h3 { font-family: var(--font-mono); font-size: var(--step--1); font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin-bottom: 6px; }
+.skill p { margin: 0; }
+
+/* contact */
+.contact { display: grid; grid-template-columns: repeat(4, 1fr); border: 1.5px solid var(--ink); background: var(--surface); }
+.contact div { padding: 14px 16px; border-right: 1px solid var(--line); min-width: 0; }
+.contact div:last-child { border-right: 0; }
+.contact .v { font-family: var(--font-mono); font-size: 0.875rem; user-select: all; overflow-wrap: anywhere; }
+.contact .eyebrow { display: block; margin-bottom: 4px; }
+
+/* lightbox */
+dialog#lb { border: 0; padding: 0; background: transparent; max-width: min(96vw, 1400px); max-height: 92vh; }
+dialog#lb::backdrop { background: rgba(5, 10, 8, 0.86); }
+dialog#lb img { display: block; max-width: min(96vw, 1400px); max-height: 84vh; object-fit: contain; margin-inline: auto; }
+dialog#lb p { color: #E2E9E5; font-family: var(--font-mono); font-size: var(--step--1); text-align: center; margin: 10px 0 0; }
+dialog#lb button { position: absolute; top: 6px; right: 6px; background: rgba(0,0,0,.6); color: #fff; border: 0; font: inherit; padding: 6px 12px; cursor: pointer; }
+
+@media (max-width: 860px) {
+  .titleblock { grid-template-columns: 120px 1fr; }
+  .tb-cells, .highlights, .contact { grid-template-columns: 1fr 1fr; }
+  .tb-cell:nth-child(2n), .highlights li:nth-child(2n), .contact div:nth-child(2n) { border-right: 0; }
+  .tb-cell:nth-child(-n+2), .highlights li:nth-child(-n+2), .contact div:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+  .proj-body { grid-template-columns: 1fr; }
+  .gallery, .path { border-right: 0; border-bottom: 1px solid var(--line); }
+  .exp { grid-template-columns: 1fr; gap: 8px; }
+  .others { grid-template-columns: 1fr; }
+  .skills { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 520px) {
+  .titleblock { grid-template-columns: 1fr; }
+  .titleblock .photo { border-right: 0; border-bottom: 1.5px solid var(--ink); max-width: 160px; }
+  .skills { grid-template-columns: 1fr; }
+  .other { grid-template-columns: 96px 1fr; }
+  .sec-head { flex-wrap: wrap; }
+  .sec-head .eyebrow { margin-left: 0; }
+}
+@media (prefers-reduced-motion: reduce) { .gallery img { transition: none; } }
+</style>
+</head>
+<body>
+
+<nav class="top" aria-label="Bölümler">
+  <div class="wrap">
+    <a href="#hakkimda">Hakkımda</a>
+    <a href="#deneyim">Deneyim</a>
+    <a href="#projeler">Projeler</a>
+    <a href="#diger">Diğer</a>
+    <a href="#yetkinlikler">Yetkinlikler</a>
+    <a href="#iletisim">İletişim</a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <header class="titleblock" aria-label="Kimlik">
+    <div class="photo"><img src="img/profil.jpg" alt="Recep Sağlam"></div>
+    <div class="tb-main">
+      <div class="tb-name">
+        <h1>Recep Sağlam</h1>
+        <p>Aviyonik donanım · Uçuş bilgisayarı tasarımı · Donanım test ve doğrulama</p>
+      </div>
+      <div class="tb-cells">
+        <div class="tb-cell"><span class="eyebrow">Bölüm</span><span class="v">EEM 4. sınıf<br>+ Bilgisayar Müh. yan dal</span></div>
+        <div class="tb-cell"><span class="eyebrow">Üniversite</span><span class="v">İstanbul Üniversitesi-Cerrahpaşa</span></div>
+        <div class="tb-cell"><span class="eyebrow">AGNO</span><span class="v">3,74 / 4,00</span></div>
+        <div class="tb-cell"><span class="eyebrow">Bağlantılar</span><span class="v"><a href="https://github.com/recepsaglam" target="_blank" rel="noopener">GitHub</a> · <a href="https://www.linkedin.com/in/recepsaglam1/" target="_blank" rel="noopener">LinkedIn</a></span></div>
+      </div>
+    </div>
+  </header>
+  <ul class="highlights" aria-label="Öne çıkanlar">
+    <li><b>Birincilik</b><span>TEKNOFEST 2026 Orta İrtifa Roket</span></li>
+    <li><b>Üçüncülük</b><span>IREC 2025 SDL Payload Challenge, ABD</span></li>
+    <li><b>Üçüncülük</b><span>TEKNOFEST 2024 Yüksek İrtifa Roket</span></li>
+    <li><b>ASELSAN</b><span>Donanım test ve doğrulama stajı, 2026</span></li>
+  </ul>
+
+  <section class="block" id="hakkimda">
+    <div class="sec-head"><h2>Hakkımda</h2></div>
+    <div class="prose">
+      <p>İstanbul Üniversitesi-Cerrahpaşa'da Elektrik-Elektronik Mühendisliği 4. sınıf öğrencisiyim ve Bilgisayar Mühendisliği yan dalı yapıyorum.</p>
+      <p>2022'den bu yana üniversite roket takımlarında aviyonik donanım geliştiriyorum. Uçuş bilgisayarları, haberleşme kartları ve yer istasyonu tasarladım; şematikten PCB dizgisine ve uçuş testine kadar sürecin tamamında çalıştım. Tasarladığım kartlar TEKNOFEST ve IREC yarışmalarında gerçek uçuşlarda görev yaptı.</p>
+      <p>2026 yazında ASELSAN'da donanım test ve doğrulama alanında staj yaptım. Uçuş ve görev bilgisayarı donanımı, sensör sistemleri ve donanım doğrulama alanlarında kendimi geliştirmeye devam etmek istiyorum.</p>
+    </div>
+  </section>
+
+  <section class="block" id="deneyim">
+    <div class="sec-head"><h2>Deneyim</h2></div>
+
+    <div class="exp">
+      <div class="exp-meta"><b>ASELSAN</b>Temmuz – Eylül 2026<br>Akyurt, Ankara</div>
+      <div>
+        <h3>Stajyer Mühendis</h3>
+        <p class="sub">MEOS Sektör Başkanlığı · Donanım Test ve Doğrulama Müdürlüğü</p>
+        <ul class="points">
+          <li>Linux tabanlı bir SBC üzerinde, FPGA'ya bağlı DDR belleği doğrulamak için C ile kullanıcı alanında çalışan bir PCIe test kütüphanesi geliştirdim.</li>
+          <li>Bu kütüphaneyi kullanan <span class="mono">pcietest</span> komut satırı uygulamasını yazdım.</li>
+          <li>PCIe bağlantı eğitimi (link training) kaynaklı bir donanım sorununun kök neden analizini yürüttüm.</li>
+          <li>MSP430 ve TI F29H85x platformlarında I2C, SPI ve UART çalışmaları yaptım; MISRA kuralları ve cppcheck ile statik kod analizi uyguladım.</li>
+        </ul>
+        <p class="note">PCIe test aracı <a href="#pcietest">Projeler</a> bölümünde genel hatlarıyla anlatılmıştır; kod ve donanım görselleri kurum içi gizlilik nedeniyle paylaşılmamıştır.</p>
+      </div>
+    </div>
+
+    <div class="exp">
+      <div class="exp-meta"><b>Aeronist Aerospace</b>Kasım 2022 – devam ediyor<br>İÜC, Avcılar</div>
+      <div>
+        <h3>Başkan Yardımcısı</h3>
+        <p class="sub">Önceki görevler: Donanım Birimi Kaptanı (2024–2025), Donanım Birimi Üyesi (2022–2024)</p>
+        <ul class="points">
+          <li>TEKNOFEST 2026 Orta İrtifa'da birincilik alan roketin aviyonik sistem mimarisini ve yedek haberleşme kartını tasarladım.</li>
+          <li>Hibrit Roket Motoru Geliştirme Takımı'nın kaptanlığını yürütüyorum.</li>
+          <li>Yeni takım üyelerine Altium Designer ile PCB tasarımı eğitimi verdim.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp">
+      <div class="exp-meta"><b>GÖK-HAN Roket Takımı</b>Aralık 2023 – Eylül 2026<br>Fatih, İstanbul</div>
+      <div>
+        <h3>Donanım Birimi Kaptanı</h3>
+        <p class="sub">Sonda roketleri için aviyonik sistem geliştirme</p>
+        <ul class="points">
+          <li>STM32 ve ESP32 tabanlı uçuş bilgisayarları ile yer kontrol istasyonu tasarladım.</li>
+          <li>Alt birimler arasındaki teknik iletişimi yürüttüm ve geliştirme süreçleri boyunca teknik raporlar hazırladım.</li>
+          <li>Li-Ion batarya paketlemesi ve yüksek G ile titreşime dayanıklı kablolama yaptım.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="projeler">
+    <div class="sec-head"><h2>Projeler</h2><span class="eyebrow">Yeniden eskiye</span></div>
+
+    <!-- TEKNOFEST 2026 -->
+    <article class="proj" id="teknofest-2026">
+      <div class="proj-head">
+        <div><span class="tag">TEKNOFEST 2026 · Birincilik</span></div>
+        <h3>Orta İrtifa Roketi Aviyonik Mimarisi ve umay Yedek Haberleşme Kartı</h3>
+        <span class="role">Aeronist Aerospace · Telemetri mimarisi, şematik ve 4 katmanlı PCB tasarımı</span>
+      </div>
+      <div class="proj-body">
+        <div class="gallery two">
+          <button class="fit" data-cap="umay Rocket Tracker v2, MCU ve SIM yüzü (render)"><img src="img/umay-on.jpg" alt="umay kartının MCU ve SIM kart yuvası olan yüzü"></button>
+          <button class="fit" data-cap="umay Rocket Tracker v2, LTE ve GNSS yüzü (render)"><img src="img/umay-arka.jpg" alt="umay kartının LTE modülü ve GNSS anteni olan yüzü"></button>
+          <button data-cap="TEKNOFEST 2026 Orta İrtifa fırlatışı, rampadan ayrılış"><img src="img/t26-rampa.jpg" alt="Roketin rampadan kalkışı"></button>
+          <button data-cap="TEKNOFEST 2026 Orta İrtifa, motorlu uçuş"><img src="img/t26-ucus.jpg" alt="Roket motorlu uçuşta"></button>
+        </div>
+        <div class="detail">
+          <div><h4>Görev</h4><p>Roketin ve görev yükünün telemetrisini birbirinden bağımsız hatlar üzerinden yer istasyonuna taşıyan yedekli aviyonik mimari. Mimarinin son yedeği, tüm LoRa hatları kaybedilse bile hücresel ağ (LTE) üzerinden konum gönderen umay kartı.</p></div>
+          <div><h4>Uçuş sonuçları</h4>
+            <ul class="points">
+              <li>4.165 m tepe irtifasına çıkan uçuşta haberleşme kesintisi yaşanmadı.</li>
+              <li>Takım olarak TEKNOFEST 2026 Orta İrtifa Roket Yarışması'nda birinci olduk.</li>
+            </ul>
+          </div>
+          <div><h4>Mimari</h4>
+            <ul class="points">
+              <li>Aviyonik bölmede ve görev yükünde 400 MHz ve 900 MHz bantlarında çalışan dört ayrı LoRa telemetri hattı; yer istasyonunda her hat için ayrı Yagi anten ve alıcı, iki yer kontrol bilgisayarı.</li>
+              <li>Son yedek katman: LoRa hatlarından bağımsız, LTE üzerinden konum gönderen umay.</li>
+              <li>Vericiler zaman paylaşımlı gönderim yaptı. Zaman dilimleri GNSS saati ile senkronize edildi; GNSS olmadığında zaman tutma LSE kristaliyle sürdürüldü.</li>
+            </ul>
+          </div>
+          <div><h4>umay teknik özellikleri</h4>
+            <dl class="spec">
+              <dt>MCU</dt><dd>STM32L071CBT6, HSE + LSE kristal</dd>
+              <dt>Hücresel</dt><dd>EG915N-EA LTE Cat 1, micro SIM</dd>
+              <dt>GNSS</dt><dd>L86-M33, 1PPS kesmeye bağlı</dd>
+              <dt>Basınç</dt><dd>BMP390 (I2C)</dd>
+              <dt>Kayıt</dt><dd>W25Q64, 64 Mbit SPI flash</dd>
+              <dt>Güç</dt><dd>1S Li-Ion, PTC sigorta, TVS, PMOS anahtar, TLV73333 LDO</dd>            </dl>
+          </div>
+          <div class="stack-wrap"><h4>Katman yapısı · 4 katman</h4>
+            <div class="stack" aria-label="Sinyal, GND, GND, Sinyal">
+              <div class="l sig"><b>L1</b><i></i></div>
+              <div class="l gnd"><b>L2</b><i></i></div>
+              <div class="l gnd"><b>L3</b><i></i></div>
+              <div class="l sig"><b>L4</b><i></i></div>
+              <div class="l"><span>bakır: sinyal · yeşil: GND düzlemi</span></div>
+            </div>
+          </div>
+          <div><h4>Neler yaptım</h4>
+            <ul class="points">
+              <li>Roketin telemetri mimarisini kurdum: hatların bant ve donanım dağılımı, yer istasyonu alıcıları ve zaman paylaşımlı gönderim düzeni.</li>
+              <li>umay'ın şematiğini blok diyagram, güç, MCU, çevre birimleri, telemetri ve revizyon geçmişi sayfalarından oluşan hiyerarşik yapıda, PCB'sini 4 katmanlı olarak tasarladım.</li>
+              <li>Güç girişine aşırı akım ve ESD koruması, MCU'dan kapatılabilen çevre birimi beslemesi ve pil gerilimi ölçümü ekledim; MCU ile LTE modülü arasına seviye dönüştürücü (TXS0104) koydum.</li>            </ul>
+          </div>
+        </div>
+        <div class="figs">
+          <figure>
+            <button data-cap="Yedekli telemetri mimarisi: aviyonik bölme, görev yükü ve yer istasyonu"><img src="img/t26-mimari.png" alt="Yedekli telemetri mimarisi blok şeması"></button>
+            <figcaption>Yedekli telemetri mimarisi. Aviyonik bölme ve görev yükündeki dört LoRa hattı, yer istasyonunda ayrı alıcılara iniyor. umay bu hatlardan bağımsız, son yedek olarak LTE üzerinden çalışıyor.</figcaption>
+          </figure>
+          <figure>
+            <button data-cap="umay blok diyagramı (şematik, sayfa 2/7)"><img src="img/umay-blok.png" alt="umay kartının blok diyagramı"></button>
+            <figcaption>umay blok diyagramı. Güç zinciri, MCU çevre birimleri ve LTE modülü bağlantıları.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </article>
+
+    <!-- pcietest -->
+    <article class="proj" id="pcietest">
+      <div class="proj-head">
+        <div><span class="tag">ASELSAN · Staj 2026</span></div>
+        <h3>pcietest: Kullanıcı Alanından PCIe Bellek Erişim Aracı</h3>
+        <span class="role">Donanım Test ve Doğrulama Müdürlüğü · Test kütüphanesi ve komut satırı aracı (C)</span>
+      </div>
+      <div class="proj-body">
+        <div class="path" aria-label="Erişim yolu: pcietest, test kütüphanesi, sysfs, FPGA, DDR">
+          <div class="band">
+            <span class="eyebrow">Kullanıcı alanı</span>
+            <div class="node">pcietest<small>Komut satırı aracı: seçenekler, dosya G/Ç, lspci ile listeleme</small></div>
+            <div class="arrow">↓ kütüphane çağrıları</div>
+            <div class="node">PCIe test kütüphanesi<small>BAR açma, eşleme, 8/16/32 bit okuma-yazma</small></div>
+          </div>
+          <div class="arrow">↓ open() + mmap()</div>
+          <div class="band">
+            <span class="eyebrow">Linux çekirdeği</span>
+            <div class="node">sysfs<small>/sys/bus/pci/devices/&lt;BDF&gt;/resource&lt;N&gt;</small></div>
+          </div>
+          <div class="arrow">↓ BAR adres aralığı, PCIe bağlantısı</div>
+          <div class="band">
+            <span class="eyebrow">Donanım</span>
+            <div class="node">FPGA<small>PCIe uç noktası</small></div>
+            <div class="arrow">↓</div>
+            <div class="node">DDR bellek<small>Doğrulanan bellek</small></div>
+          </div>
+        </div>
+        <div class="detail">
+          <div><h4>Görev</h4><p>Linux tabanlı bir SBC üzerinde, FPGA'ya bağlı DDR belleği PCIe üzerinden doğrulamak. Bunun için çekirdek sürücüsü yazmadan, kullanıcı alanından cihaz belleğine okuma ve yazma yapabilen bir C kütüphanesi ve bu kütüphaneyi kullanan <span class="mono">pcietest</span> aracını geliştirdim.</p></div>
+          <div><h4>Nasıl çalışıyor</h4>
+            <ul class="points">
+              <li>Hedef cihaz BDF adresiyle, bellek bölgesi BAR numarasıyla seçiliyor. Çekirdeğin sysfs altında her BAR için açtığı <span class="mono">resourceN</span> dosyası açılıyor.</li>
+              <li>Dosya <span class="mono">mmap</span> ile programın adres alanına eşleniyor. Sonrasında BAR'a, dolayısıyla FPGA üzerinden DDR'a, işaretçilerle doğrudan erişiliyor.</li>
+              <li>Erişim genişliği 8, 16 veya 32 bit seçilebiliyor; tek değer yazılıp okunabiliyor.</li>
+              <li>Belleğin bir bölümü <span class="mono">.bin</span> dosyasına dökülebiliyor ya da bir <span class="mono">.bin</span> dosyası belleğe yazılabiliyor. Eleman sayısı verilmezse BAR ya da dosya boyutundan hesaplanıyor.</li>
+              <li>Bellek BAR'ı olan PCI cihazları <span class="mono">lspci</span> üzerinden listelenebiliyor.</li>
+            </ul>
+          </div>
+          <div><h4>Teknik özellikler</h4>
+            <dl class="spec">
+              <dt>Dil</dt><dd>C, kütüphane + CLI</dd>
+              <dt>Ortam</dt><dd>Linux, kullanıcı alanı</dd>
+              <dt>Erişim</dt><dd>sysfs resourceN + mmap</dd>
+              <dt>Genişlik</dt><dd>8 / 16 / 32 bit</dd>
+              <dt>Adresleme</dt><dd>BDF, BAR (0–5), ofset, eleman sayısı</dd>
+            </dl>
+          </div>
+          <div><h4>Örnek doğrulama akışı</h4>
+<pre class="cli"><span class="c"># cihazları ve bellek BAR'larını listele</span>
+$ ./pcietest -l
+<span class="c"># tek bir 32 bit değer yaz, geri oku</span>
+$ ./pcietest -d 04:00.0 -b 0 -o 0x1000 -w32 -v 0xA5A5A5A5
+$ ./pcietest -d 04:00.0 -b 0 -o 0x1000 -r32 -c 1
+<span class="c"># 4 KB desen yaz (1024 × 32 bit), geri döküp karşılaştır</span>
+$ ./pcietest -d 04:00.0 -b 0 -wf32 -f desen.bin
+$ ./pcietest -d 04:00.0 -b 0 -rf32 -c 1024 -f okunan.bin
+$ cmp desen.bin okunan.bin</pre>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Edirnekapı XP payload -->
+    <article class="proj" id="edirnekapi-xp">
+      <div class="proj-head">
+        <div><span class="tag">TEKNOFEST 2025 · Finalist</span></div>
+        <h3>Edirnekapı XP Görev Yükü Bilgisayarı</h3>
+        <span class="role">GÖK-HAN Roket Takımı · Şematik, PCB tasarımı</span>
+      </div>
+      <div class="proj-body">
+        <div class="gallery two">
+          <button class="fit" data-cap="Edirnekapı XP, bileşen yüzü (render). Sol üstte DRA818V VHF modülü"><img src="img/xp-ust.jpg" alt="Görev yükü kartı bileşen yüzü"></button>
+          <button class="fit" data-cap="Edirnekapı XP, LoRa ve GNSS yüzü (render)"><img src="img/xp-alt.jpg" alt="Görev yükü kartı LoRa modülü yüzü"></button>
+        </div>
+        <div class="detail">
+          <div><h4>Görev</h4><p>TEKNOFEST 2025 Yüksek İrtifa roketinin görev yükü bilgisayarı. Sensör verisini kaydediyor, konumu ve telemetriyi LoRa ile gönderiyor, kameraları ve kurtarma ateşlemesini yönetiyor.</p></div>
+          <div><h4>Çözülen sorun: ayrılmada güç kesilmesi</h4>
+            <p>Önceki uçuşta görev yükü roketten ayrılırken kartın beslemesi kesilmişti. Bu kartta yazılımla tutulan bir güç mandalı (soft latch) tasarladım. Anahtar kapanınca P-MOSFET beslemeyi açıyor; MCU açılır açılmaz <span class="mono">PWR_HOLD</span> hattını yükselterek kendi beslemesini tutuyor. Ayrılma anında anahtar kontağı kopsa bile kart çalışmaya devam ediyor. Anahtarın durumu <span class="mono">SW_SENSE</span> hattından okunuyor ve kapatma yazılım kontrolüyle yapılıyor.</p>
+          </div>
+          <div><h4>Deneysel: VHF ve APRS</h4>
+            <p>Amatör telsizcilikten gelen bir fikirle, APRS'in roket takibinde kullanılabilir olup olmadığını denemek için karta DRA818V VHF modülü ekledim. APRS ses sinyali MCU'nun DAC çıkışından üretilecek şekilde tasarlandı. Yazılımı yarışmaya yetişmediği için uçuşta kullanılmadı.</p>
+          </div>
+          <div><h4>Teknik özellikler</h4>
+            <dl class="spec">
+              <dt>MCU</dt><dd>STM32F446RET6</dd>
+              <dt>Sensörler</dt><dd>BMI088 IMU, BME280 basınç/sıcaklık</dd>
+              <dt>Konum</dt><dd>L86 GNSS, 1PPS</dd>
+              <dt>Telemetri</dt><dd>E22-400T37S (LoRa), DRA818V (VHF)</dd>
+              <dt>Ateşleme</dt><dd>VN5E160 yüksek taraf sürücü, açık devre algılama</dd>
+              <dt>Kayıt</dt><dd>microSD</dd>
+              <dt>Arayüzler</dt><dd>RS232 test portu (ST3232), USB-UART, UKB bağlantısı, 2 servo + enkoder girişi, kamera kontrolü</dd>
+              <dt>Güç</dt><dd>Soft latch, AP63205 buck → 5V, TLV767 LDO → 4V / 3V3, INA139 akım ve gerilim ölçümü</dd>            </dl>
+          </div>
+        </div>
+        <div class="figs">
+          <figure class="compact">
+            <button data-cap="Soft latch güç devresi (şematik, Power sayfası)"><img src="img/xp-latch.png" alt="Soft latch güç kontrol devresi şematiği"></button>
+            <figcaption>Soft latch devresi. Q400 beslemeyi açıyor, MCU'nun sürdüğü PWR_HOLD hattı Q401 üzerinden onu açık tutuyor; SW_SENSE anahtar durumunu MCU'ya bildiriyor.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </article>
+
+    <!-- Sub-Etha GCS -->
+    <article class="proj" id="sub-etha-gcs">
+      <div class="proj-head">
+        <div><span class="tag">IREC 2025 · TEKNOFEST 2025</span></div>
+        <h3>Sub-Etha Kablosuz Yer İstasyonu</h3>
+        <span class="role">GÖK-HAN Roket Takımı · Şematik, PCB tasarımı</span>
+      </div>
+      <div class="proj-body">
+        <div class="gallery stacked">
+          <button class="fit" data-cap="Sub-Etha GCS v2.0, ekran ve kontrol yüzü (render)"><img src="img/gcs-on.jpg" alt="Yer istasyonu kartının ekranlı ön yüzü"></button>
+          <button class="fit" data-cap="Sub-Etha GCS v2.0, ESP32 ve LoRa yüzü (render)"><img src="img/gcs-arka.jpg" alt="Yer istasyonu kartının ESP32 ve LoRa modülü yüzü"></button>
+        </div>
+        <div class="detail">
+          <div><h4>Görev</h4><p>Roketten LoRa ile gelen telemetriyi alan, kendi ekranında gösteren, SD karta kaydeden ve ESP-NOW ile yer istasyonu bilgisayarına kablosuz ileten yer istasyonu kartı.</p></div>
+          <div><h4>Çözülen sorun</h4>
+            <p>Önceki yer istasyonlarında alıcı, bilgisayara kabloyla bağlıydı. Sahada operatör bilgisayara bağlı kalıyor, kablonun çıkması veri kaybına yol açabiliyordu. Bu kartla alıcı bilgisayardan bağımsız çalışıyor ve veriler kartın ekranında da izlenebiliyor.</p>
+          </div>
+          <div><h4>Teknik özellikler</h4>
+            <dl class="spec">
+              <dt>MCU</dt><dd>ESP32-WROOM-32D</dd>
+              <dt>Alıcı</dt><dd>E22-400T30D (LoRa)</dd>
+              <dt>Ekran</dt><dd>Nextion NX3224X028, 2,8" HMI + 3 menü butonu</dd>
+              <dt>Bilgisayar bağlantısı</dt><dd>ESP-NOW (kablosuz) veya FT232R ile USB (kablolu)</dd>
+              <dt>Kayıt</dt><dd>microSD</dd>
+              <dt>Güç</dt><dd>12,6 V'a kadar pil girişi, AP63205 buck → 5V, AMS1117 → 3V3</dd>            </dl>
+          </div>
+          <div><h4>Neler yaptım</h4>
+            <ul class="points">
+              <li>Kablosuz ve kablolu çalışma arasında geçiş için kart üzerine mod seçim anahtarı koydum; kablosuz bağlantıda sorun olursa USB'ye dönülebiliyor.</li>
+              <li>Pil girişine TVS diyot, sinyal hatlarına ESD koruması ekledim.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Reaction wheel -->
+    <article class="proj" id="reaksiyon-tekeri">
+      <div class="proj-head">
+        <div><span class="tag">IREC 2025 · Üçüncülük</span></div>
+        <h3>Reaksiyon Tekeri Kontrol Kartı</h3>
+        <span class="role">GÖK-HAN Roket Takımı · Şematik, 6 katmanlı PCB tasarımı ve test</span>
+      </div>
+      <div class="proj-body">
+        <div class="gallery">
+          <button class="lead fit" data-cap="Reaksiyon tekeri kontrol kartı, üst yüz (render)"><img src="img/rw-pcb-ust.jpg" alt="Reaksiyon tekeri kontrol kartı üst yüz render"></button>
+          <button class="fit" data-cap="Alt yüz (render)"><img src="img/rw-pcb-alt.jpg" alt="Kartın alt yüz render'ı"></button>
+          <button data-cap="Reaksiyon tekeri deney düzeneği ve kart"><img src="img/rw-sistem.jpg" alt="Reaksiyon tekeri deney düzeneği"></button>
+          <button data-cap="IREC 2025 roketi, fırlatma rampasında"><img src="img/irec-rampa.jpg" alt="Roket fırlatma rampasında"></button>
+          <button data-cap="IREC 2025 ödül töreni, SDL Payload Challenge üçüncülüğü"><img src="img/irec-odul.jpg" alt="IREC ödül töreni"></button>
+          <button data-cap="IREC 2025 takım fotoğrafı"><img src="img/irec-takim.jpg" alt="IREC takım fotoğrafı"></button>
+        </div>
+        <div class="detail">
+          <div><h4>Görev</h4><p>Rokette bilimsel deney olarak taşınan reaksiyon tekeri sisteminin PID kontrol algoritmasını çalıştıran, dönüş ölçümlerini yapan ve motoru süren kart. ABD'deki IREC 2025, SDL Payload Challenge kategorisinde üçüncülük aldı.</p></div>
+          <div><h4>Teknik özellikler</h4>
+            <dl class="spec">
+              <dt>MCU</dt><dd>STM32F446RET6</dd>
+              <dt>IMU</dt><dd>BMI088</dd>
+              <dt>Manyetometre</dt><dd>LSM303AGR</dd>
+              <dt>Motor sürücü</dt><dd>VNH5019ATR-E</dd>
+              <dt>Kayıt</dt><dd>SD kart, RTC pili</dd>
+              <dt>Boyut</dt><dd>45 × 50 mm</dd>
+            </dl>
+          </div>
+          <div class="stack-wrap"><h4>Katman yapısı · 6 katman</h4>
+            <div class="stack" aria-label="SIG/PWR, GND, SIG/PWR, GND, SIG/PWR, GND">
+              <div class="l sig"><b>L1</b><i></i></div>
+              <div class="l gnd"><b>L2</b><i></i></div>
+              <div class="l sig"><b>L3</b><i></i></div>
+              <div class="l gnd"><b>L4</b><i></i></div>
+              <div class="l sig"><b>L5</b><i></i></div>
+              <div class="l gnd"><b>L6</b><i></i></div>
+              <div class="l"><span>bakır: sinyal/güç · yeşil: GND düzlemi</span></div>
+            </div>
+          </div>
+          <div><h4>Neler yaptım</h4>
+            <ul class="points">
+              <li>İlk 6 katmanlı kartımı tasarlayıp ürettim ve testlerini yaptım.</li>
+              <li>Boyut kısıtı nedeniyle yoğun yerleşimli bir PCB çizdim; EMI konusunu araştırıp katman yapısı ve yerleşimde dikkate aldım.</li>
+              <li>Şematiği Altium'da hiyerarşik yapıda tasarladım.</li>
+            </ul>
+          </div>
+          <div class="links"><a href="https://github.com/recepsaglam/uBoard" target="_blank" rel="noopener">Proje dosyaları ↗</a><a href="https://youtu.be/OlarCq2cWf0" target="_blank" rel="noopener">Uçuş videosu ↗</a></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Edirnekapı -->
+    <article class="proj" id="edirnekapi">
+      <div class="proj-head">
+        <div><span class="tag">TEKNOFEST 2024 · Üçüncülük</span></div>
+        <h3>Edirnekapı Uçuş Bilgisayarı</h3>
+        <span class="role">GÖK-HAN Roket Takımı · Tasarım, dizgi, entegrasyon</span>
+      </div>
+      <div class="proj-body">
+        <div class="gallery">
+          <button class="lead fit" data-cap="Edirnekapı UKB, üst yüz (render)"><img src="img/edk-render.jpg" alt="Edirnekapı uçuş bilgisayarı render"></button>
+          <button data-cap="Dizgisi yapılmış kartlar"><img src="img/edk-kartlar.jpg" alt="Üretilmiş uçuş bilgisayarı kartları"></button>
+          <button data-cap="Aviyonik kızak entegrasyonu"><img src="img/edk-aviyonik.jpg" alt="Aviyonik bölüm entegrasyonu"></button>
+          <button data-cap="TEKNOFEST 2024 Yüksek İrtifa fırlatışı"><img src="img/edk-firlatma.jpg" alt="Roketin fırlatılışı"></button>
+          <button data-cap="Uçuş sonrası kurtarılan roket"><img src="img/edk-kurtarma.jpg" alt="Uçuş sonrası kurtarma"></button>
+          <button data-cap="Roket fırlatma rampasında"><img src="img/edk-rampa.jpg" alt="Roket fırlatma rampasında"></button>
+        </div>
+        <div class="detail">
+          <div><h4>Görev</h4><p>Yüksek irtifa roketinin kurtarma sistemini (paraşüt ayrılması) yöneten, konum belirleyen, uçuş verisini yer istasyonuna ileten ve roket üzerindeki kameraları kontrol eden ana uçuş bilgisayarı.</p></div>
+          <div><h4>Uçuş sonuçları</h4>
+            <ul class="points">
+              <li>4,7 km tepe irtifasına çıkan uçuşta tüm görevlerini tamamladı; mekanik şok ve titreşimden etkilenmedi.</li>
+              <li>Roket paraşüt açıldıktan sonra uzak bir noktaya sürüklendi; yer istasyonuyla bağlantı kesilmedi.</li>
+              <li>Montaj gününde aviyonik onay etiketini ilk alan takım olduk.</li>
+            </ul>
+          </div>
+          <div><h4>Teknik özellikler</h4>
+            <dl class="spec">
+              <dt>MCU</dt><dd>STM32F446RET6</dd>
+              <dt>Basınç/sıcaklık</dt><dd>BME280</dd>
+              <dt>IMU</dt><dd>BMI088</dd>
+              <dt>Akım/gerilim</dt><dd>INA139, pil gerilimi ölçümü</dd>
+              <dt>GNSS</dt><dd>L86-M33</dd>
+              <dt>Telemetri</dt><dd>E22-400T37S (LoRa)</dd>
+              <dt>Kayıt</dt><dd>SD kart, RTC pili</dd>
+              <dt>Boyut</dt><dd>100 × 75 mm, 2 katman</dd>
+            </dl>
+          </div>
+          <div><h4>Neler yaptım</h4>
+            <ul class="points">
+              <li>Kurtarma sistemi için MOSFET seçimi ve ilgili hesaplamaları yaptım.</li>
+              <li>EMI, EMC ve ESD koruması konularını araştırıp tasarımda dikkate aldım.</li>
+              <li>Küçük paketli sensörler dahil kartın dizgisini yaptım; üretimde stok, dokümantasyon ve üretim takibini yürüttüm.</li>
+            </ul>
+          </div>
+          <div class="links">
+            <a href="https://github.com/recepsaglam/edirnekapi" target="_blank" rel="noopener">Proje dosyaları ↗</a>
+            <a href="https://docs.google.com/spreadsheets/d/132SNe3OnAd735DChKdIJyssX2SwiRSwp/" target="_blank" rel="noopener">Uçuş verileri ↗</a>
+            <a href="https://drive.google.com/file/d/1h_Z1NPedMou1xyBmKqzQalPMypIkjr9m/" target="_blank" rel="noopener">Uçuş raporu ↗</a>
+            <a href="https://youtu.be/y470v2XZMng" target="_blank" rel="noopener">Uçuş videosu 1 ↗</a>
+            <a href="https://youtu.be/TL-l2DjjOKc" target="_blank" rel="noopener">Uçuş videosu 2 ↗</a>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- e3 -->
+    <article class="proj" id="e3">
+      <div class="proj-head">
+        <div><span class="tag">TEKNOFEST 2023 · Orta İrtifa</span></div>
+        <h3>e3 Uçuş Kontrol Bilgisayarı</h3>
+        <span class="role">Aeronist Aerospace · İlk Altium tasarımım</span>
+      </div>
+      <div class="proj-body">
+        <div class="gallery">
+          <button class="lead fit" data-cap="e3 rev2 (render)"><img src="img/e3-render.jpg" alt="e3 uçuş kontrol bilgisayarı render"></button>
+          <button class="fit" data-cap="Üst katman yerleşimi"><img src="img/e3-ust.jpg" alt="Üst bakır katman"></button>
+          <button class="fit" data-cap="Alt katman yerleşimi"><img src="img/e3-alt.jpg" alt="Alt bakır katman"></button>
+        </div>
+        <div class="detail">
+          <div><h4>Görev</h4><p>Orta irtifa roketinin paraşüt sistemini yöneten, konum belirleyen ve uçuş verisini yer istasyonuna aktaran uçuş kontrol bilgisayarı.</p></div>
+          <div><h4>Teknik özellikler</h4>
+            <dl class="spec">
+              <dt>MCU</dt><dd>ATmega328P-AU</dd>
+              <dt>Basınç/sıcaklık</dt><dd>MS5611</dd>
+              <dt>IMU</dt><dd>BMI088</dd>
+              <dt>Bellek</dt><dd>W25Q64JV, 64 Mbit SPI flash</dd>
+              <dt>Kurtarma</dt><dd>N kanal MOSFET sürüş</dd>
+              <dt>Boyut</dt><dd>65 × 50 mm</dd>
+            </dl>
+          </div>
+          <div class="stack-wrap"><h4>Katman yapısı · 4 katman</h4>
+            <div class="stack" aria-label="SIG/GND, GND, GND, SIG/GND">
+              <div class="l mix"><b>L1</b><i></i></div>
+              <div class="l gnd"><b>L2</b><i></i></div>
+              <div class="l gnd"><b>L3</b><i></i></div>
+              <div class="l mix"><b>L4</b><i></i></div>
+              <div class="l"><span>bakır+yeşil: sinyal ve GND dökümü · yeşil: GND düzlemi</span></div>
+            </div>
+          </div>
+          <div><h4>Neler yaptım</h4>
+            <ul class="points">
+              <li>Sonraki projelerde de kullandığım komponent kütüphanesini oluşturdum.</li>
+              <li>Projeyi Git ile sürüm kontrolü altında yürüttüm.</li>
+            </ul>
+          </div>
+          <div class="links"><a href="https://github.com/recepsaglam/e3" target="_blank" rel="noopener">Proje dosyaları ↗</a></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Avcılar -->
+    <article class="proj" id="avcilar">
+      <div class="proj-head">
+        <div><span class="tag">TEKNOFEST 2023 · Orta İrtifa</span></div>
+        <h3>Avcılar Haberleşme Kartı</h3>
+        <span class="role">Aeronist Aerospace · Tasarım ve dizgi</span>
+      </div>
+      <div class="proj-body">
+        <div class="gallery two">
+          <button class="fit" data-cap="Avcılar haberleşme kartı (render)"><img src="img/avc-render.jpg" alt="Avcılar haberleşme kartı render"></button>
+          <button data-cap="Antenleriyle birlikte montaj"><img src="img/avc-montaj.jpg" alt="Haberleşme kartı montajı"></button>
+        </div>
+        <div class="detail">
+          <div><h4>Görev</h4><p>GNSS ile roketin konumunu belirleyip LoRa üzerinden yer istasyonuna uçuş verisi aktaran kart. LoRa modülünün çalışma modunu kart üzerinden anahtarla seçmeye izin verir.</p></div>
+          <div><h4>Teknik özellikler</h4>
+            <dl class="spec">
+              <dt>Telemetri</dt><dd>EBYTE E32-900T30D (LoRa)</dd>
+              <dt>GNSS</dt><dd>NEO-6M V2</dd>
+              <dt>Arayüz</dt><dd>UART</dd>
+              <dt>Boyut</dt><dd>75 × 60 mm, 2 katman</dd>
+            </dl>
+          </div>
+          <div><h4>Neler yaptım</h4>
+            <ul class="points">
+              <li>Haberleşme link bütçesi hesabı yaptım, temel anten parametrelerini inceledim.</li>
+              <li>GNSS sistemlerinin çalışma prensiplerini inceledim.</li>
+            </ul>
+          </div>
+          <div class="links"><a href="https://github.com/recepsaglam/avcilar" target="_blank" rel="noopener">Proje dosyaları ↗</a></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- GUIDE -->
+    <article class="proj" id="guide">
+      <div class="proj-head">
+        <div><span class="tag">TEKNOFEST 2023 · Orta İrtifa</span></div>
+        <h3>GUIDE Yer İstasyonu Yazılımı</h3>
+        <span class="role">Aeronist Aerospace · VB.NET</span>
+      </div>
+      <div class="proj-body">
+        <div class="gallery">
+          <button class="solo fit" data-cap="GUIDE arayüzü: roket ve görev yükü telemetrisi"><img src="img/guide-arayuz.jpg" alt="GUIDE yer istasyonu arayüzü"></button>
+        </div>
+        <div class="detail">
+          <div><h4>Görev</h4><p>Roket ve görev yükünden gelen telemetriyi gerçek zamanlı gösteren yer istasyonu yazılımı.</p></div>
+          <div><h4>Neler yaptım</h4>
+            <ul class="points">
+              <li>Donanımla UART üzerinden haberleşen, gelen paketleri CRC ile doğrulayan yazılımı geliştirdim.</li>
+              <li>İrtifa, hız, yönelim ve atmosfer verilerinin grafiklerini; roketin konumunu uydu haritasında ve haritada mesafe ölçümünü ekledim.</li>
+              <li>Hakem yer istasyonuna veri aktarımı için ayrı bir bağlantı noktası tanımladım.</li>
+            </ul>
+          </div>
+          <div class="links"><a href="https://github.com/recepsaglam/guide" target="_blank" rel="noopener">Proje dosyaları ↗</a></div>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <section class="block" id="diger">
+    <div class="sec-head"><h2>Diğer Projeler</h2></div>
+    <div class="others">
+      <div class="other">
+        <button data-cap="Öğrenci otomasyon sistemi giriş ekranı"><img src="img/java.jpg" alt="Öğrenci otomasyon sistemi"></button>
+        <div><h3>Öğrenci Otomasyon Sistemi</h3><p>Yan dal Nesneye Yönelik Programlama dersi için iki kişilik ekipte geliştirilen, CSV ile veri tutan Java masaüstü uygulaması. 2025.</p></div>
+      </div>
+      <div class="other">
+        <button data-cap="Ses etkileşimli asansör prototipi"><img src="img/asansor.jpg" alt="Ses etkileşimli asansör prototipi"></button>
+        <div><h3>Ses Etkileşimli Asansör</h3><p>Asansörün sesli komutla kullanılmasını sağlayan prototip. Raspberry Pi üzerinde Python ile konuşma tanıma; mekanik parçalar SolidWorks ile tasarlanıp 3B yazıcıyla üretildi. 2021, lise, TÜBİTAK 2204-A.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="yetkinlikler">
+    <div class="sec-head"><h2>Yetkinlikler</h2></div>
+    <div class="skills">
+      <div class="skill"><h3>Donanım tasarımı</h3><p>Altium Designer (hiyerarşik şematik, 6 katmana kadar PCB), KiCad, LTspice, SMD dizgi</p></div>
+      <div class="skill"><h3>Gömülü sistemler</h3><p>STM32, ESP32, ATmega328P, MSP430, TI F29H85x, Linux tabanlı SBC</p></div>
+      <div class="skill"><h3>Protokoller</h3><p>UART, I2C, SPI, RS232, PCIe, LoRa</p></div>
+      <div class="skill"><h3>Test ve doğrulama</h3><p>Osiloskop, lojik analizör, multimetre; donanım testi ve kök neden analizi; MISRA C, cppcheck</p></div>
+      <div class="skill"><h3>Yazılım</h3><p>C, Python, VB.NET, Java, MATLAB, Git</p></div>
+      <div class="skill"><h3>Diller</h3><p>Türkçe (ana dil), İngilizce B2 · YDS 90, YÖKDİL 85</p></div>
+    </div>
+  </section>
+
+  <section class="block" id="iletisim">
+    <div class="sec-head"><h2>İletişim</h2><span class="eyebrow">Çağrı işareti TA1RVS</span></div>
+    <div class="contact">
+      <div><span class="eyebrow">E-posta</span><span class="v">recepsaglam@ogr.iuc.edu.tr</span></div>
+      <div><span class="eyebrow">Telefon</span><span class="v">+90 554 183 46 90</span></div>
+      <div><span class="eyebrow">GitHub</span><span class="v"><a href="https://github.com/recepsaglam" target="_blank" rel="noopener">github.com/recepsaglam</a></span></div>
+      <div><span class="eyebrow">LinkedIn</span><span class="v"><a href="https://www.linkedin.com/in/recepsaglam1/" target="_blank" rel="noopener">in/recepsaglam1</a></span></div>
+    </div>
+  </section>
+</main>
+
+<dialog id="lb" aria-label="Görsel">
+  <button type="button" id="lb-close">Kapat</button>
+  <img id="lb-img" alt="">
+  <p id="lb-cap"></p>
+</dialog>
+
+<script>
+(function () {
+  var lb = document.getElementById('lb'), img = document.getElementById('lb-img'), cap = document.getElementById('lb-cap');
+  document.querySelectorAll('.gallery button, .other button, .figs button').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var i = b.querySelector('img');
+      img.src = i.src; img.alt = i.alt; cap.textContent = b.dataset.cap || i.alt;
+      if (lb.showModal) lb.showModal();
+    });
+  });
+  document.getElementById('lb-close').addEventListener('click', function () { lb.close(); });
+  lb.addEventListener('click', function (e) { if (e.target === lb) lb.close(); });
+})();
+</script>
+</body>
+</html>
